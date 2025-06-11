@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3040271df84ab4bbc081edb8d5e3e6, type: 3}
   m_Name: Normal Guy
   m_EditorClassIdentifier: 
+  rfidUID: 79 A1 2E 6E
+  characterPortrait: {fileID: 0}
   string_nama: Normal Guy
   int_hp: 100
   int_atkDmg: 20

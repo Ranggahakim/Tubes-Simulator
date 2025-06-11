@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3040271df84ab4bbc081edb8d5e3e6, type: 3}
   m_Name: lort
   m_EditorClassIdentifier: 
+  rfidUID: 00 00 00 00
+  characterPortrait: {fileID: 0}
   string_nama: lort
   int_hp: 500
-  int_atkDmg: 75
+  int_atkDmg: 500

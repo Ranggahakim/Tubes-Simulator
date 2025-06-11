@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3040271df84ab4bbc081edb8d5e3e6, type: 3}
   m_Name: Tank
   m_EditorClassIdentifier: 
+  rfidUID: "D9 37 6A\_6E"
+  characterPortrait: {fileID: 0}
   string_nama: Tank
   int_hp: 200
   int_atkDmg: 10

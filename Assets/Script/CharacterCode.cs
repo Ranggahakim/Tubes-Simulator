@@ -60,7 +60,7 @@ public class CharacterCode : MonoBehaviour
 
     public void Attack(CharacterCode target)
     {
-        Debug.Log($"{gameObject.name} nyerang {target.gameObject.name}");
+        // Debug.Log($"{gameObject.name} nyerang {target.gameObject.name}");
         target.GetDamage(int_atkDmg);
     }
 

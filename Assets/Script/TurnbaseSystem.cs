@@ -18,6 +18,9 @@ public class TurnbaseSystem : MonoBehaviour
     public UnityEvent ExecuteWhenStartRound;
     public UnityEvent ExecuteWhenEndRound;
 
+    public UnityEvent ExecuteWhenWin;
+    public UnityEvent ExecuteWhenLose;
+
     [Space]
 
     public float float_countdownTime = 10;
@@ -134,7 +137,22 @@ public class TurnbaseSystem : MonoBehaviour
 
         ExecuteWhenEndRound.Invoke();
 
-        StartCoroutine(BetweenRound());
+        if (player.int_hp > 0 && enemy.int_hp > 0)
+        {
+            StartCoroutine(BetweenRound());
+        }
+        else
+        {
+            Debug.Log("Menang atw kalah");
+            if (player.int_hp <= 0)
+            {
+                ExecuteWhenLose.Invoke();
+            }
+            if (enemy.int_hp <= 0)
+            {
+                ExecuteWhenWin.Invoke();
+            }
+        }
     }
 
     public HitterCondition DecideWinner()

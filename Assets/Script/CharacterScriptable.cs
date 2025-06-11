@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CharacterScriptable", menuName = "Scriptable Objects/CharacterScriptable")]
 public class CharacterScriptable : ScriptableObject
 {
+    public string rfidUID = "00 00 00 00";
+    public Sprite characterPortrait;
     public string string_nama;
     public int int_hp;
     public int int_atkDmg;
