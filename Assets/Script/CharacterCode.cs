@@ -62,12 +62,14 @@ public class CharacterCode : MonoBehaviour
     public void Attack(CharacterCode target)
     {
         // Debug.Log($"{gameObject.name} nyerang {target.gameObject.name}");
+        myAnimator.SetTrigger("atk");
         target.GetDamage(int_atkDmg);
     }
 
     public void GetDamage(int damage)
     {
         // Debug.Log($"animasi dimulai");
+        myAnimator.SetTrigger("dmg");
         StartCoroutine(waitAnimation(damage));
     }
 
