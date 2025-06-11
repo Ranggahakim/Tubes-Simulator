@@ -4,6 +4,8 @@ using System.Linq; // Untuk menggunakan .FirstOrDefault() atau .Where()
 
 public class GameLogicManager : MonoBehaviour
 {
+    public ActorTemporaryDataScriptable myCharacter;
+
     // Ini diperlukan jika kamu ingin mengontrol LED/Buzzer sebagai respons
     public ArduinoSerialHandler arduinoHandler;
 
@@ -16,6 +18,7 @@ public class GameLogicManager : MonoBehaviour
     public static event Action<CharacterScriptable> OnCharacterDetected;
 
     private CharacterScriptable currentlySelectedCharacter; // Untuk menyimpan karakter yang saat ini terdeteksi
+
 
     void OnEnable()
     {
@@ -40,7 +43,7 @@ public class GameLogicManager : MonoBehaviour
     {
         // Memuat semua ScriptableObject CharacterScriptable dari folder Resources/Characters
         // Pastikan semua aset CharacterScriptable kamu berada di dalam folder Resources/Characters/
-        allCharacters = Resources.LoadAll<CharacterScriptable>("Characters");
+        // allCharacters = Resources.LoadAll<CharacterScriptable>("Characters");
         if (allCharacters.Length == 0)
         {
             Debug.LogWarning("Tidak ada aset CharacterScriptable ditemukan di Resources/Characters/. Pastikan sudah dibuat.");
@@ -58,10 +61,22 @@ public class GameLogicManager : MonoBehaviour
         // Cari karakter yang cocok dengan RFID UID ini
         CharacterScriptable detectedCharacter = null;
 
+        Debug.Log($"total character: {allCharacters.Length}");
+
         foreach (CharacterScriptable character in allCharacters)
         {
-            // Debug.Log($"{rfidUID} && {character.rfidUID}");
-            if (rfidUID == character.rfidUID)
+            // Debug.Log("tes");
+            // Debug.Log($"{rfidUID} && {character.rfidUID.Trim().Replace(((char)160).ToString(), " ").Replace("\u00A0", " ")}");
+            // foreach (char c in rfidUID)
+            // {
+            //     Debug.Log("Karakter: " + c + " | ASCII: " + (int)c);
+            // }
+            // foreach (char c in character.rfidUID.Trim().Replace(((char)160).ToString(), " ").Replace("\u00A0", " "))
+            // {
+            //     Debug.Log("Karakter: " + c + " | ASCII: " + (int)c);
+            // }
+
+            if (rfidUID.Trim() == character.rfidUID.Trim().Replace(((char)160).ToString(), " ").Replace("\u00A0", " "))
             {
                 detectedCharacter = character;
             }
@@ -82,6 +97,7 @@ public class GameLogicManager : MonoBehaviour
                 arduinoHandler.SetBuzzer(true);
                 Invoke("TurnOffBuzzerAndLED", 0.5f);
             }
+            myCharacter.SetNewData(detectedCharacter);
             // Kamu bisa menampilkan UI karakter di sini
             // misalnya, CharacterPortrait.sprite = detectedCharacter.characterPortrait;
         }

@@ -23,6 +23,9 @@ public class TurnbaseSystem : MonoBehaviour
 
     [Space]
 
+    public ArduinoSerialHandler arduinoHandler;
+    [Space]
+
     public float float_countdownTime = 10;
     public bool bool_isTimeToFChoose;
 
@@ -62,6 +65,29 @@ public class TurnbaseSystem : MonoBehaviour
         }
     }
 
+    public void PencetTombol(int angka)
+    {
+        Debug.Log(angka);
+        if (bool_isTimeToFChoose)
+        {
+            switch (angka)
+            {
+                case 1:
+                    playerKGB = KGBEnum.kertas;
+                    player.SetImageActive(playerKGB);
+                    break;
+                case 2:
+                    playerKGB = KGBEnum.gunting;
+                    player.SetImageActive(playerKGB);
+                    break;
+                case 3:
+                    playerKGB = KGBEnum.batu;
+                    player.SetImageActive(playerKGB);
+                    break;
+            }
+        }
+    }
+
     public void StartRound()
     {
         // Debug.Log("Start");
@@ -75,6 +101,12 @@ public class TurnbaseSystem : MonoBehaviour
     IEnumerator CountdownChoose()
     {
         bool_isTimeToFChoose = true;
+        arduinoHandler.SetBuzzer(true);
+        yield return new WaitForSeconds(.15f);
+        arduinoHandler.SetBuzzer(false);
+
+
+        arduinoHandler.SetLedRGB(Color.green);
 
         yield return new WaitForSeconds(float_countdownTime);
 
@@ -222,21 +254,35 @@ public class TurnbaseSystem : MonoBehaviour
     public IEnumerator BetweenRound()
     {
         // Debug.Log("Ini adalah jeda");
+        arduinoHandler.SetBuzzer(true);
+        arduinoHandler.SetLedRGB(Color.red);
 
         yield return new WaitForSeconds(1);
 
         // Debug.Log("Ini diantara jeda");
         playerKGB = KGBEnum.none;
         enemyKGB = KGBEnum.none;
+        arduinoHandler.SetBuzzer(false);
 
         player.SetImageActive(playerKGB);
         enemy.SetImageActive(enemyKGB);
 
+        arduinoHandler.SetLedRGB(Color.black); // Matikan LED
         yield return new WaitForSeconds(3);
 
         // Debug.Log("Jeda beres :DDD");
 
         StartRound();
+    }
+
+
+    void TurnOffBuzzerAndLED()
+    {
+        if (arduinoHandler != null)
+        {
+            arduinoHandler.SetBuzzer(false);
+            arduinoHandler.SetLedRGB(Color.black); // Matikan LED
+        }
     }
 }
 

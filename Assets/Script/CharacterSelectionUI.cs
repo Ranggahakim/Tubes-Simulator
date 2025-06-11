@@ -6,6 +6,8 @@ public class CharacterSelectionUI : MonoBehaviour
 {
     public Image characterPortraitImage; // Seret komponen Image dari Canvas UI di sini
     public TextMeshProUGUI characterNameText; // Seret komponen Text dari Canvas UI di sini
+    public TextMeshProUGUI characterHPText;
+    public TextMeshProUGUI characterdmgText;
     public GameObject pressStartText; // Teks "Tekan Tombol untuk Mulai"
 
     void OnEnable()
@@ -35,6 +37,14 @@ public class CharacterSelectionUI : MonoBehaviour
         if (characterNameText != null)
         {
             characterNameText.text = character.string_nama;
+        }
+        if (characterdmgText != null)
+        {
+            characterdmgText.text = character.int_atkDmg.ToString();
+        }
+        if (characterHPText != null)
+        {
+            characterHPText.text = character.int_hp.ToString();
         }
         if (pressStartText != null)
         {

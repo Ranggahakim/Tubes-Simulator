@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3040271df84ab4bbc081edb8d5e3e6, type: 3}
   m_Name: Assassin
   m_EditorClassIdentifier: 
-  rfidUID: "89 88 8B\_6E"
+  rfidUID: 52 1D B5 05
   characterPortrait: {fileID: 0}
   string_nama: Assassin
   int_hp: 50

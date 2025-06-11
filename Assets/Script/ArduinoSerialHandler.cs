@@ -79,7 +79,7 @@ public class ArduinoSerialHandler : MonoBehaviour
     void ProcessIncomingMessage(string message)
     {
         message = message.Trim(); // Remove newline characters
-        Debug.Log("Received from Arduino: " + message);
+        // Debug.Log("Received from Arduino: " + message);
 
         if (message.StartsWith("RFID:"))
         {
