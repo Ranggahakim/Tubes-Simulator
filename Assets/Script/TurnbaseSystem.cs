@@ -34,6 +34,8 @@ public class TurnbaseSystem : MonoBehaviour
 
     void Start()
     {
+        player.tbs = this;
+        enemy.tbs = this;
         StartRound();
     }
 
@@ -119,11 +121,12 @@ public class TurnbaseSystem : MonoBehaviour
                 enemy.SetImageActive(enemyKGB);
                 break;
         }
-
+        ExecuteWhenEndRound.Invoke();
         switch (DecideWinner())
         {
             case HitterCondition.neutral:
                 Debug.Log("Netral");
+                StartCoroutine(BetweenRound());
                 break;
             case HitterCondition.player:
                 player.Attack(enemy);
@@ -135,20 +138,26 @@ public class TurnbaseSystem : MonoBehaviour
                 break;
         }
 
-        ExecuteWhenEndRound.Invoke();
+    }
 
-        if (player.int_hp > 0 && enemy.int_hp > 0)
+    public void AdaYangKalah(CharacterCode character, bool isIt)
+    {
+        //character adalah yang kalah
+        // isIt adalah apakah ada yang kalah atw tidak... kalo true artinya ada yang kalah
+
+        if (!isIt)
         {
+            Debug.Log("Masih ada yang belum kalah");
             StartCoroutine(BetweenRound());
+
         }
         else
         {
-            Debug.Log("Menang atw kalah");
-            if (player.int_hp <= 0)
+            if (character == player)
             {
                 ExecuteWhenLose.Invoke();
             }
-            if (enemy.int_hp <= 0)
+            else if (character == enemy)
             {
                 ExecuteWhenWin.Invoke();
             }
@@ -210,7 +219,7 @@ public class TurnbaseSystem : MonoBehaviour
         return HitterCondition.neutral;
     }
 
-    IEnumerator BetweenRound()
+    public IEnumerator BetweenRound()
     {
         // Debug.Log("Ini adalah jeda");
 

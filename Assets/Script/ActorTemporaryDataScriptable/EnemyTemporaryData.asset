@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83092e90138ce584e81022218ea9e7ac, type: 3}
   m_Name: EnemyTemporaryData
   m_EditorClassIdentifier: 
-  string_nama: Assassin
+  string_nama: Tank
   int_hp: 0
   int_atkDmg: 0
